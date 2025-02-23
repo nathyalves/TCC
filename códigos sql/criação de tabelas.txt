@@ -1,0 +1,28 @@
+
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    usuario VARCHAR(50) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    tipo ENUM('recepcionista', 'enfermeira', 'medico', 'paciente') NOT NULL
+);
+CREATE TABLE pacientes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    endereco TEXT NOT NULL
+);
+
+CREATE TABLE dados_clinicos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    paciente_id INT,
+    pressao VARCHAR(10),
+    glicemia VARCHAR(10),
+    peso DECIMAL(5, 2),
+    altura DECIMAL(4, 2),
+    imc DECIMAL(5, 2),
+    tipo_sanguineo VARCHAR(3),
+    historico_doencas TEXT,
+    exames TEXT,
+    FOREIGN KEY (paciente_id) REFERENCES pacientes(id)
+);
