@@ -1,0 +1,26 @@
+Atenção para funcionar tem que certificar que o banco de dados está funcionando . 
+
+insere um admin com seguinte código 
+INSERT INTO usuarios (nome, usuario, senha, tipo)
+VALUES ('Admin', 'admin', '$2y$10$E3Z7X8y9A1B2C3D4E5F6G7H8I9J0K', 'admin');
+
+feito isso siga estes passos 
+
+Execute esse arquivo PHP gerar_hash.php separado .
+exemplo de navegação minha http://localhost/dashboard/TCC/Atualiza%c3%a7%c3%a3o21/gerar_hash.php
+
+ele vai gerar a senha criptografada  do admin  copie a senha 
+
+
+Vá até banco de dados entre na tabela usuários  ache o usuário que foi cadastrado.
+
+nome	usuário        	senha (hash)	                 tipo
+Admin	admin	   $2y$10$E3Z7X8y9A1B2C3D4E5F6G7H8I9J0K	 admin
+                             |
+                             V
+                          clique em editar 
+apague a senha 
+cole a senha que foi gerada pelo hash 
+clique em executar 
+
+volte a tela de login 
