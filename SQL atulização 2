@@ -1,0 +1,80 @@
+Criação do Banco de dados clinica 
+
+Tabela usuarios:
+•	Armazena os usuários do sistema (admin, recepcionista, enfermeira, médico).
+CREATE TABLE usuarios (
+  `id` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `usuario` varchar(50) NOT NULL,
+  `senha` varchar(255) NOT NULL,
+  `cpf` varchar(14) NOT NULL,
+  `tipo` enum('admin','recepcionista','enfermeira','medico','enfermagem_medicacao','tec_laboratorial','tec_raiox') NOT NULL
+);
+Tabela medicamento:
+CREATE TABLE `medicamento` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `descricao` text DEFAULT NULL,
+  `fabricante` varchar(100) DEFAULT NULL,
+  `quantidade` int(11) NOT NULL,
+  `data_validade` date NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+
+Tabela pacientes:
+•	Armazena os dados dos pacientes cadastrados pelo recepcionista.
+CREATE TABLE pacientes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    endereco VARCHAR(200) NOT NULL,
+    telefone VARCHAR(14) NOT NULL,
+     cep     VARCHAR(8) NOT NULL,
+      Cidade VARCHAR(50) NOT NULL,
+     estado VARCHAR(2) NOT NULL
+    
+);
+Tabela triagens:
+•	Armazena os dados da triagem feita pela enfermeira. 
+•	CREATE TABLE triagens (
+•	    id INT AUTO_INCREMENT PRIMARY KEY,
+•	    paciente_id INT NOT NULL,
+•	    pressao VARCHAR(10),
+•	    glicemia VARCHAR(10),
+•	    peso DECIMAL(5,2),
+•	    altura DECIMAL(3,2),
+•	    imc DECIMAL(5,2),
+•	    tipo_sanguineo VARCHAR(3),
+•	    historico_doencas TEXT,
+•	    alergia TEXT,
+•	 onde_sente_dor TEXT,
+•	data_que_comecou TEXT,
+•	    FOREIGN KEY (paciente_id) REFERENCES pacientes(id)
+•	);
+
+Tabela consultas:
+•	Armazena os dados das consultas feitas pelo médico.
+
+CREATE TABLE consultas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    paciente_id INT NOT NULL,
+    triagem_id INT NOT NULL,
+    observacoes TEXT,
+    diagnostico TEXT,
+    prescricao TEXT,
+     exames TEXT,
+    FOREIGN KEY (paciente_id) REFERENCES pacientes(id),
+    FOREIGN KEY (triagem_id) REFERENCES triagens(id)
+);
+Estrutura do Projeto
+/Sistema de Crendiciamento de Pacientes
+│
+├── conexao.php              (Conexão com o banco de dados)
+├── cabecalho.php            (Cabeçalho)
+├── rodape.php               (Rodapé)
+├── estilo.css               (Estilos CSS)
+├── login.php                (Página de login)
+├── cadastro_usuario.php     (Cadastro de usuários pelo admin)
+├── cadastro_paciente.php    (Cadastro de pacientes pelo recepcionista)
+├── cadastro_triagem.php     (Cadastro de triagem pela enfermeira)
+├── cadastro_consulta.php    (Cadastro de consulta pelo médico)
+└── index.php                (Página inicial)
